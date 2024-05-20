@@ -6,6 +6,8 @@ const cookieEncrypter = require("cookie-encrypter");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const logger = require("./logger");
+const routes = require("./routes");
+const globalErrorHandler = require('./errorHandlers/globalErrorHandler')
 require("dotenv").config();
 require('./DB/connection')
 
@@ -30,6 +32,9 @@ const stream = {
 };
 
 server.use(morgan("combined", { stream: stream }));
+
+server.use(routes);
+server.use(globalErrorHandler)
 
 server.listen(PORT, () => {
     console.log(`Server running at ${PORT}`);
