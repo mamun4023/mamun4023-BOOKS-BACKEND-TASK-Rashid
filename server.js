@@ -7,6 +7,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const logger = require("./logger");
 require("dotenv").config();
+require('./DB/connection')
 
 const PORT = process.env.PORT;
 const secretKey = process.env.COOKIE_SECRET;
