@@ -1,5 +1,4 @@
 const dbServices = require("../DB/user");
-const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
 const catchError = require("../errorHandlers/errorCatcher");
 const successResponse = require("../responseHandlers/successResponse");
@@ -36,11 +35,11 @@ exports.signIn = asyncHandler(async (req, res, next) => {
     const token = await generateToken(user);
     res.cookie("token", token, {
         httpOnly: true,
-        signed: true,
+        // signed: true,
         secure: true,
         maxAge: 60 * 60 * 1024,
     });
-    successResponse({ res, message: CONSTANTS.LOGIN_MESSAGE, data: { token } });
+    successResponse({ res, message: CONSTANTS.LOGIN_MESSAGE });
 });
 
 
