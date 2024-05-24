@@ -10,7 +10,7 @@ exports.addBook = asyncHandler(async (req, res, next) => {
 });
 
 exports.updateBook = asyncHandler(async (req, res, next) => {
-    if(!req.params.id || req.body){
+    if(!req.params.id || !req.body){
         next(new catchError(CONSTANTS.GIVEN_DATA_IS_INVALID, 400))
         return
     }
