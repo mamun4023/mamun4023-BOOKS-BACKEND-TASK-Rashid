@@ -10,7 +10,6 @@ const CONSTANTS = {
     BOOK_ADD_MESSAGE : "Book has been added",
     BOOK_UPDATE_MESSAGE : "Book has been updated",
     BOOK_REMOVE_MESSAGE : "Book has been removed"
-    
 }
 
 module.exports = {CONSTANTS}
