@@ -11,14 +11,15 @@ exports.signUp = asyncHandler(async (req, res, next) => {
         next(new catchError(CONSTANTS.USER_ALREADY_EXIST, 400));
         return;
     }
-
     const newuser = await dbServices.createUser(req.body);
-
     successResponse({ res, message: CONSTANTS.SIGNUP_MESSAGE, data: newuser });
 });
 
 exports.signIn = asyncHandler(async (req, res, next) => {
     const { email, password } = req.body;
+    if (!email || !password) {
+        next(new catchError(CONSTANTS.GIVEN_DATA_IS_INVALID, 400));
+    }
     const user = await dbServices.findUser(email);
     if (!user) {
         next(new catchError(CONSTANTS.USER_DOES_NOT_EXIST, 400));
@@ -42,8 +43,12 @@ exports.signIn = asyncHandler(async (req, res, next) => {
     successResponse({ res, message: CONSTANTS.LOGIN_MESSAGE });
 });
 
+exports.logout = asyncHandler(async (req, res, next) => {
+    if (!req.cookies.token) {
+        next(new catchError(CONSTANTS.LOGOUT_ERROR_MSG, 400));
+        return;
+    }
 
-exports.logout = asyncHandler(async(req, res)=>{
-    res.clearCookie("token")
+    res.clearCookie("token");
     successResponse({ res, message: CONSTANTS.LOGOUT_MESSAGE });
-})
+});

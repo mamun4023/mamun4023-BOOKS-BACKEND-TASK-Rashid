@@ -1,14 +1,15 @@
 
 const jwt = require("jsonwebtoken");
 const catchError = require("../errorHandlers/errorCatcher");
+const {CONSTANTS} = require("../constants")
 
-const isAuthenticatedUser = async (req, res, next) => {
+const isUser = async (req, res, next) => {
     const token = req.cookies.token;
     // console.log("token" , token)
-    if (!token) return next(new catchError("Trying unauthorized access!", 404));
+    if (!token) return next(new catchError(CONSTANTS.UNAUTHORIZED_ACCESS_MSG, 400));
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
-            next(new catchError("Invalid token", 404));
+            next(new catchError(CONSTANTS.INVALID_TOKEN, 404));
             return;
         }
         req.user = decoded;
@@ -16,12 +17,12 @@ const isAuthenticatedUser = async (req, res, next) => {
     });
 };
 
-const isAuthenticatedAdmin = async (req, res, next) => {
+const isAdmin = async (req, res, next) => {
     const user = req.user;
     if (user.role != "admin") {
-        next(new catchError("You does not have authority to access!"));
+        next(new catchError(CONSTANTS.UNAUTHORIZED_ACCESS_MSG, 400));
     }
     next();
 };
 
-module.exports = { isAuthenticatedUser, isAuthenticatedAdmin };
+module.exports = { isUser, isAdmin };
