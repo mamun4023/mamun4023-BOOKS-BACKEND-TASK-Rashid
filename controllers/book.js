@@ -20,7 +20,7 @@ exports.findAllBooks = asyncHandler(async (req, res) => {
 });
 
 exports.findSingleBook = asyncHandler(async (req, res) => {
-    const book = await dbServices.findSingleBook(req.params.id)
+    const book = await dbServices.singleBook(req.params.id)
     successResponse({ res, message: CONSTANTS.SINGLE_BOOK, data : book });
 });
 

@@ -7,7 +7,7 @@ router.post('/signup', userControllers.signUp)
 router.post('/signin', userControllers.signIn)
 router.post('/logout', userControllers.logout)
 
-router.get('/test',  isAuthenticatedUser, isAuthenticatedAdmin, (req, res)=>{
+router.get('/test',  isAuthenticatedUser, (req, res)=>{
     res.send("testing ")
 })
 
