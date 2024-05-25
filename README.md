@@ -13,17 +13,21 @@ A testing project with some APIs endpoints.
 
 ## Installation
 
-Install npm  with npm
+Mongodb Local Database has been used. Must have the install mongodb in local PC. 
+
+Install All dependecy
 
 ```bash
   npm install
 ```
-    
-## Deployment
 
-Run the project in developemnet mode
+
+    
+## Run development server
 
 ```bash
   npm run dev
 ```
 
+## API Doumentation
+ https://documenter.getpostman.com/view/28549113/2sA3QqgCvr
